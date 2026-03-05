@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eBay List Price Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>eBay List Price Calculator</h1>
+      <p class="subtitle">Calculate your listing price from cost and target profit</p>
+    </header>
+
+    <main>
+      <section class="inputs">
+        <h2>Input</h2>
+        
+        <div class="form-group">
+          <label for="cost">Item Cost ($)</label>
+          <input type="number" id="cost" placeholder="0.00" step="0.01" min="0" required>
+        </div>
+
+        <div class="form-group profit-mode-group">
+          <label>Target Profit</label>
+          <div class="profit-mode-toggle">
+            <label class="radio-label">
+              <input type="radio" name="profitMode" value="amount" checked>
+              <span>Fixed Amount</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="profitMode" value="percent">
+              <span>Profit Margin %</span>
+            </label>
+          </div>
+          <div class="profit-input-wrap">
+            <input type="number" id="profit" placeholder="0.00" step="0.01" min="0">
+            <span class="profit-unit" id="profitUnit">$</span>
+          </div>
+          <span class="input-hint" id="profitHint">Desired profit amount</span>
+        </div>
+
+        <div class="form-group">
+          <label for="shipping">Shipping Cost ($)<span class="hint">Your out-of-pocket shipping, enter 0 if none</span></label>
+          <input type="number" id="shipping" placeholder="0.00" step="0.01" min="0" value="0">
+        </div>
+
+        <details class="calibration-section" open>
+          <summary>Fee Calibration</summary>
+          <p class="calibration-desc">eBay fees are calculated on order total (including tax). Enter a real order's Order total and Transaction fees to reverse-calculate your rate.</p>
+          <div class="calibration-fields">
+            <div class="form-group">
+              <label for="calSaleAmount">Order Total ($)<span class="hint">What the buyer paid, i.e. Order total (including tax)</span></label>
+              <input type="number" id="calSaleAmount" placeholder="48.25" step="0.01" min="0">
+            </div>
+            <div class="form-group">
+              <label for="calFees">Transaction Fees ($)<span class="hint">From eBay order details</span></label>
+              <input type="number" id="calFees" placeholder="6.96" step="0.01" min="0">
+            </div>
+            <button type="button" id="applyCalibration" class="btn-calibrate">Calculate & Apply Rate</button>
+            <p class="calibration-result" id="calibrationResult"></p>
+          </div>
+        </details>
+
+        <details class="fee-advanced">
+          <summary>Fee Settings</summary>
+          <div class="fee-simple">
+            <div class="form-group">
+              <label for="taxRate">Estimated Tax Rate (%)<span class="hint">Optional; most US states ~7–8%. Use 0 for tax-free estimate</span></label>
+              <input type="number" id="taxRate" placeholder="0" step="0.5" min="0" max="20" value="0">
+            </div>
+            <div class="form-group">
+              <label for="transactionFee">Transaction Fee Rate (%)</label>
+              <input type="number" id="transactionFee" placeholder="15.3" step="0.01" min="0" max="100" value="15.3">
+              <span class="input-hint">Calculated on order total including tax; use calibration above</span>
+            </div>
+            <div class="form-group">
+              <label for="adFee">Promoted Listings Fee (%)<span class="hint">Enter if using Promoted Listings</span></label>
+              <input type="number" id="adFee" placeholder="0" step="0.01" min="0" max="100" value="0">
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <button type="button" id="calculate" class="btn-calculate">Calculate List Price</button>
+
+      <section class="results" id="results">
+        <h2>Result</h2>
+        <div class="result-main" id="resultMain">
+          <span class="result-label">Suggested List Price (item + shipping)</span>
+          <span class="result-value" id="listPrice">—</span>
+        </div>
+        <div class="result-breakdown" id="resultBreakdown">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>For reference only. Actual fees may vary. See eBay for official fee details.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
