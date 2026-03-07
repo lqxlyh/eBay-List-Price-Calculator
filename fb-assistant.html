@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FB Marketplace Resell Assistant</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="app-nav">
+    <a href="index.html" class="nav-link">eBay Calculator</a>
+    <a href="fb-assistant.html" class="nav-link active">FB Resell Assistant</a>
+  </nav>
+
+  <div class="container fb-assistant">
+    <header>
+      <h1>FB Marketplace Resell Assistant</h1>
+      <p class="subtitle">Upload a photo → AI identifies item, suggests price & writes listing</p>
+    </header>
+
+    <main>
+      <section class="upload-section">
+        <div class="upload-zone" id="uploadZone">
+          <input type="file" id="fileInput" accept="image/*" capture="environment" hidden>
+          <div class="upload-placeholder" id="uploadPlaceholder">
+            <span class="upload-icon">📷</span>
+            <p>Tap to take a photo or choose an image</p>
+          </div>
+          <div class="upload-preview" id="uploadPreview" hidden>
+            <img id="previewImg" src="" alt="Preview">
+            <button type="button" class="btn-remove" id="btnRemove">Remove</button>
+          </div>
+        </div>
+      </section>
+
+      <button type="button" id="analyzeBtn" class="btn-calculate" disabled>
+        Analyze & Generate Listing
+      </button>
+
+      <div class="loading" id="loading" hidden>
+        <div class="spinner"></div>
+        <p>AI is analyzing your item…</p>
+      </div>
+
+      <div class="error" id="error" hidden></div>
+
+      <section class="results fb-results" id="results" hidden>
+        <h2>Item Info</h2>
+        <div class="result-card" id="identificationCard"></div>
+
+        <h2>Pricing Suggestion</h2>
+        <div class="result-card" id="pricingCard"></div>
+
+        <h2>Ready for Facebook Marketplace</h2>
+        <div class="copy-card">
+          <div class="copy-block">
+            <label>Title</label>
+            <div class="copy-row">
+              <code id="copyTitle"></code>
+              <button type="button" class="btn-copy" data-copy="title">Copy</button>
+            </div>
+          </div>
+          <div class="copy-block">
+            <label>Price</label>
+            <div class="copy-row">
+              <code id="copyPrice"></code>
+              <button type="button" class="btn-copy" data-copy="price">Copy</button>
+            </div>
+          </div>
+          <div class="copy-block">
+            <label>Description</label>
+            <div class="copy-row">
+              <code id="copyDesc" class="copy-desc"></code>
+              <button type="button" class="btn-copy" data-copy="desc">Copy</button>
+            </div>
+          </div>
+          <button type="button" id="copyAllBtn" class="btn-copy-all">Copy All</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Uses OpenAI. For reference only. Prices are estimates based on AI knowledge.</p>
+    </footer>
+  </div>
+
+  <script src="fb-assistant.js"></script>
+</body>
+</html>
